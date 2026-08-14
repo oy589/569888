@@ -106,9 +106,81 @@ body {
   color:#887c64;
   font-size:12px;
 }
+
+/* 弹窗样式 */
+.popup-mask{
+  position: fixed;
+  inset:0;
+  background:rgba(0,0,0,0.75);
+  backdrop-filter: blur(6px);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  z-index:999;
+}
+.popup-box{
+  width:90%;
+  max-width:420px;
+  background:#18140e;
+  border:1px solid #b8a88280;
+  border-radius:16px;
+  padding:36px 28px;
+  text-align:center;
+}
+.popup-line{
+  width:60px;
+  height:2px;
+  background:#d4bc84;
+  margin:0 auto 16px;
+}
+.popup-box h2{
+  color:#e6cd90;
+  font-size:24px;
+  margin-bottom:12px;
+}
+.popup-desc{
+  color:#b8a882;
+  font-size:14px;
+  line-height:1.8;
+}
+.popup-phone{
+  color:#e6cd90;
+  font-size:22px;
+  margin:12px 0;
+  font-weight:500;
+}
+.popup-confirm{
+  width:100%;
+  margin-top:20px;
+  padding:12px;
+  border-radius:30px;
+  border:none;
+  background:linear-gradient(180deg,#c9b278,#998450);
+  font-size:15px;
+  cursor:pointer;
+}
+.popup-confirm:hover{
+  filter:brightness(1.1);
+}
 </style>
 </head>
 <body>
+
+<!-- 弹窗 -->
+<div class="popup-mask" id="popup">
+  <div class="popup-box">
+    <div class="popup-line"></div>
+    <h2>温馨提示</h2>
+    <div class="popup-desc">
+      本公司十年老品牌<br>
+      投诉建议请认准官方联系方式
+    </div>
+    <div class="popup-phone">客服电话：16571394222</div>
+    <div class="popup-phone">经理电话：18671391111</div>
+    <button class="popup-confirm" onclick="closePopup()">进入服务中心</button>
+  </div>
+</div>
+
 <div class="wrap">
   <div class="top-card">
     <div class="top-tag">OFFICIAL SERVICE</div>
@@ -152,5 +224,11 @@ body {
     请认准官方服务渠道，谨防非官方联系方式。
   </div>
 </div>
+
+<script>
+function closePopup(){
+  document.getElementById('popup').style.display = 'none';
+}
+</script>
 </body>
 </html>
