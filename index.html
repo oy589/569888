@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>官方服务中心</title>
 <style>
 *{
@@ -107,7 +107,7 @@ body {
   font-size:12px;
 }
 
-/* 弹窗样式 */
+/* 弹窗样式（适配手机，对标截图样式） */
 .popup-mask{
   position: fixed;
   inset:0;
@@ -120,43 +120,51 @@ body {
 }
 .popup-box{
   width:90%;
-  max-width:420px;
+  max-width:480px;
   background:#18140e;
-  border:1px solid #b8a88280;
-  border-radius:16px;
-  padding:36px 28px;
+  border:1px solid #b8a882;
+  border-radius:20px;
+  padding:44px 32px;
   text-align:center;
 }
 .popup-line{
-  width:60px;
+  width:70px;
   height:2px;
   background:#d4bc84;
-  margin:0 auto 16px;
+  margin:0 auto 20px;
 }
 .popup-box h2{
   color:#e6cd90;
-  font-size:24px;
-  margin-bottom:12px;
+  font-size:32px;
+  margin-bottom:20px;
+  letter-spacing:2px;
 }
 .popup-desc{
   color:#b8a882;
-  font-size:14px;
+  font-size:18px;
   line-height:1.8;
+  margin-bottom:24px;
 }
-.popup-phone{
+.popup-phone-row{
+  margin:16px 0;
+}
+.popup-phone-text{
   color:#e6cd90;
-  font-size:22px;
-  margin:12px 0;
-  font-weight:500;
+  font-size:26px;
+}
+.popup-phone-text a{
+  color:#4285f4;
+  text-decoration:underline;
 }
 .popup-confirm{
   width:100%;
-  margin-top:20px;
-  padding:12px;
-  border-radius:30px;
+  margin-top:36px;
+  padding:16px;
+  border-radius:999px;
   border:none;
-  background:linear-gradient(180deg,#c9b278,#998450);
-  font-size:15px;
+  background:linear-gradient(180deg,#c9b278,#a08b55);
+  font-size:20px;
+  color:#4285f4;
   cursor:pointer;
 }
 .popup-confirm:hover{
@@ -175,8 +183,12 @@ body {
       本公司十年老品牌<br>
       投诉建议请认准官方联系方式
     </div>
-    <div class="popup-phone">客服电话：16571394222</div>
-    <div class="popup-phone">经理电话：18671391111</div>
+    <div class="popup-phone-row popup-phone-text">
+      客服电话：<a href="tel:16571394222">16571394222</a>
+    </div>
+    <div class="popup-phone-row popup-phone-text">
+      经理电话：<a href="tel:18671391111">18671391111</a>
+    </div>
     <button class="popup-confirm" onclick="closePopup()">进入服务中心</button>
   </div>
 </div>
