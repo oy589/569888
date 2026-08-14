@@ -9,6 +9,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent; /*清除苹果点击蓝色块*/
 }
 body {
   min-height: 100vh;
@@ -107,7 +108,7 @@ body {
   font-size:12px;
 }
 
-/* 弹窗样式（适配手机，对标截图样式） */
+/* 弹窗样式，匹配你手机截图布局 */
 .popup-mask{
   position: fixed;
   inset:0;
@@ -121,8 +122,8 @@ body {
 .popup-box{
   width:90%;
   max-width:480px;
-  background:#18140e;
-  border:1px solid #b8a882;
+  background:#121212;
+  border:1px solid #d4bc84;
   border-radius:20px;
   padding:44px 32px;
   text-align:center;
@@ -140,27 +141,31 @@ body {
   letter-spacing:2px;
 }
 .popup-desc{
-  color:#b8a882;
+  color:#e6cd90;
   font-size:18px;
   line-height:1.8;
-  margin-bottom:24px;
+  margin-bottom:30px;
 }
 .popup-phone-row{
-  margin:16px 0;
+  margin:26px 0;
 }
 .popup-phone-text{
   color:#e6cd90;
   font-size:26px;
+  line-height:1.6;
 }
+/* 重点：纯净a标签样式，无任何事件干扰 */
 .popup-phone-text a{
   color:#e6cd90;
-  text-decoration: none;
-  border-bottom: 2px solid #d4bc84;
-  padding-bottom: 2px;
+  text-decoration:none;
+  border-bottom:2px solid #d4bc84;
+  padding-bottom:3px;
+  display:inline-block;
+  cursor:pointer;
 }
 .popup-confirm{
   width:100%;
-  margin-top:36px;
+  margin-top:40px;
   padding:16px;
   border-radius:999px;
   border:none;
@@ -173,11 +178,25 @@ body {
 .popup-confirm:hover{
   filter:brightness(1.1);
 }
+/* 复制提示备用 */
+.tip-toast{
+  position:fixed;
+  left:50%;
+  top:45%;
+  transform:translate(-50%,-50%);
+  background:rgba(0,0,0,0.75);
+  color:#fff;
+  padding:12px 24px;
+  border-radius:8px;
+  font-size:16px;
+  display:none;
+  z-index:1000;
+}
 </style>
 </head>
 <body>
-
-<!-- 弹窗 -->
+<div class="tip-toast" id="toast">号码已复制</div>
+<!-- 弹窗【关键改动】：a标签只保留href，删除所有onclick、ontouchstart！ -->
 <div class="popup-mask" id="popup">
   <div class="popup-box">
     <div class="popup-line"></div>
@@ -187,10 +206,12 @@ body {
       投诉建议请认准官方联系方式
     </div>
     <div class="popup-phone-row popup-phone-text">
-      客服电话：<a href="tel:16571394222">16571394222</a>
+      客服电话：<br>
+      <a href="tel:16571394222">16571394222</a>
     </div>
     <div class="popup-phone-row popup-phone-text">
-      经理电话：<a href="tel:18671391111">18671391111</a>
+      经理电话：<br>
+      <a href="tel:18671391111">18671391111</a>
     </div>
     <button class="popup-confirm" onclick="closePopup()">进入服务中心</button>
   </div>
@@ -243,6 +264,14 @@ body {
 <script>
 function closePopup(){
   document.getElementById('popup').style.display = 'none';
+}
+// 备用复制号码功能，暂时保留
+function copyText(text){
+  navigator.clipboard.writeText(text).then(()=>{
+    const toast = document.getElementById('toast');
+    toast.style.display='block';
+    setTimeout(()=>toast.style.display='none',1500);
+  })
 }
 </script>
 </body>
