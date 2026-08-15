@@ -9,7 +9,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  -webkit-tap-highlight-color: transparent; /*清除苹果点击蓝色块*/
+  -webkit-tap-highlight-color: transparent;
 }
 body {
   min-height: 100vh;
@@ -28,12 +28,12 @@ body {
   max-width: 560px;
 }
 .top-card{
-  background-color: #18140e;
+  background-color:#18140e;
   border:1px solid #3a3324;
   border-radius:16px;
-  padding:30px 20px;
+  padding:32px 26px;
   text-align:center;
-  margin-bottom:20px;
+  margin-bottom:16px;
 }
 .top-tag{
   font-size:14px;
@@ -50,18 +50,19 @@ body {
   color:#e6cd90;
   font-weight:normal;
   letter-spacing:2px;
+  margin-bottom:8px;
 }
-.top-card p{
+.top-card .desc-text{
   color:#b8a882;
   font-size:14px;
   line-height:1.7;
-  margin-top:8px;
 }
+
 .main-card{
   background-color:#18140e;
   border:1px solid #3a3324;
   border-radius:16px;
-  padding:30px 26px;
+  padding:26px;
 }
 .download-row{
   display:flex;
@@ -103,12 +104,12 @@ body {
 }
 .bottom-tips{
   text-align:center;
-  margin-top:24px;
+  margin-top:20px;
   color:#887c64;
   font-size:12px;
 }
 
-/* 弹窗样式，匹配你手机截图布局 */
+/* 弹窗样式 */
 .popup-mask{
   position: fixed;
   inset:0;
@@ -154,7 +155,6 @@ body {
   font-size:26px;
   line-height:1.6;
 }
-/* 重点：纯净a标签样式，无任何事件干扰 */
 .popup-phone-text a{
   color:#e6cd90;
   text-decoration:none;
@@ -178,7 +178,6 @@ body {
 .popup-confirm:hover{
   filter:brightness(1.1);
 }
-/* 复制提示备用 */
 .tip-toast{
   position:fixed;
   left:50%;
@@ -192,39 +191,28 @@ body {
   display:none;
   z-index:1000;
 }
+/* 分隔标题，区分区块 */
+.section-title{
+  color:#d4bc84;
+  text-align:center;
+  padding:12px 0 8px;
+  font-size:15px;
+  letter-spacing:1px;
+}
 </style>
 </head>
 <body>
-<div class="tip-toast" id="toast">号码已复制</div>
-<!-- 弹窗【关键改动】：a标签只保留href，删除所有onclick、ontouchstart！ -->
-<div class="popup-mask" id="popup">
-  <div class="popup-box">
-    <div class="popup-line"></div>
-    <h2>温馨提示</h2>
-    <div class="popup-desc">
-      本公司十年老品牌<br>
-      投诉建议请认准官方联系方式
-    </div>
-    <div class="popup-phone-row popup-phone-text">
-      客服欧信：<br>
-      <a href="6668">6668</a>
-    </div>
-    <div class="popup-phone-row popup-phone-text">
-      经理欧信：<br>
-      <a href="7777">7777</a>
-    </div>
-    <button class="popup-confirm" onclick="closePopup()">进入服务中心</button>
-  </div>
 </div>
 
 <div class="wrap">
   <div class="top-card">
     <div class="top-tag">OFFICIAL SERVICE</div>
     <h1>官方服务中心</h1>
-    <p>请通过以下官方频道获取APP</p>
+    <div class="desc-text">请通过以下官方频道获取APP</div>
   </div>
 
   <div class="main-card">
+    <div class="section-title">通讯软件</div>
     <div class="download-row">
       <div class="left-group">
         <div class="icon-box">
@@ -234,7 +222,6 @@ body {
       </div>
       <a href="https://batchat.com" target="_blank" class="gold-btn">立即下载</a>
     </div>
-
     <div class="download-row">
       <div class="left-group">
         <div class="icon-box">
@@ -244,7 +231,6 @@ body {
       </div>
       <a href="https://haiouchat.com" target="_blank" class="gold-btn">立即下载</a>
     </div>
-
     <div class="download-row">
       <div class="left-group">
         <div class="icon-box">
@@ -253,6 +239,48 @@ body {
         <span class="text-name">欧信APP下载</span>
       </div>
       <a href="https://ox8.tulinsm.top" target="_blank" class="gold-btn">立即下载</a>
+    </div>
+
+    <div class="section-title">VPN工具</div>
+    <div class="download-row">
+      <div class="left-group">
+        <span class="text-name">ExpressVPN</span>
+      </div>
+      <a href="https://expressvpn.com/vpn-software/vpn-android" target="_blank" class="gold-btn">立即下载</a>
+    </div>
+    <div class="download-row">
+      <div class="left-group">
+        <span class="text-name">NordVPN</span>
+      </div>
+      <a href="https://nordvpn.com/download/android" target="_blank" class="gold-btn">立即下载</a>
+    </div>
+    <div class="download-row">
+      <div class="left-group">
+        <span class="text-name">Surfshark</span>
+      </div>
+      <a href="https://surfshark.com/download/android" target="_blank" class="gold-btn">立即下载</a>
+    </div>
+    <div class="download-row">
+      <div class="left-group">
+        <span class="text-name">ProtonVPN</span>
+      </div>
+      <a href="https://protonvpn.com/download-android" target="_blank" class="gold-btn">立即下载</a>
+    </div>
+
+    <div class="section-title">应用平台</div>
+    <div class="download-row">
+      <div class="left-group">
+        <span class="text-name">F-Droid</span>
+      </div>
+      <a href="https://f-droid.org/" target="_blank" class="gold-btn">立即下载</a>
+    </div>
+
+    <div class="section-title">短视频</div>
+    <div class="download-row">
+      <div class="left-group">
+        <span class="text-name">TikTok</span>
+      </div>
+      <a href="https://www.tiktok.com/" target="_blank" class="gold-btn">立即下载</a>
     </div>
   </div>
 
@@ -265,7 +293,6 @@ body {
 function closePopup(){
   document.getElementById('popup').style.display = 'none';
 }
-// 备用复制号码功能，暂时保留
 function copyText(text){
   navigator.clipboard.writeText(text).then(()=>{
     const toast = document.getElementById('toast');
