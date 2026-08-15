@@ -26,7 +26,64 @@ body {
 .wrap{
   width: 100%;
   max-width: 560px;
+  display:none;
 }
+/* 密码弹窗样式 */
+.password-mask{
+  position:fixed;
+  inset:0;
+  background:#000;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  z-index:9999;
+}
+.password-box{
+  width:90%;
+  max-width:420px;
+  background-color:#18140e;
+  border:1px solid #3a3324;
+  border-radius:16px;
+  padding:36px 26px;
+  text-align:center;
+}
+.password-box h3{
+  color:#e6cd90;
+  font-size:22px;
+  margin-bottom:24px;
+}
+#pwd-input{
+  width:100%;
+  padding:14px 16px;
+  background:#111;
+  border:1px solid #443c2c;
+  border-radius:10px;
+  color:#fff;
+  font-size:16px;
+  outline:none;
+  margin-bottom:16px;
+}
+#pwd-input:focus{
+  border-color:#d4bc84;
+}
+.submit-pwd{
+  width:100%;
+  padding:14px;
+  background:linear-gradient(180deg,#c9b278,#998450);
+  border:none;
+  border-radius:10px;
+  font-size:16px;
+  color:#000;
+  font-weight:500;
+  cursor:pointer;
+}
+.tip-error{
+  color:#ff7777;
+  margin-top:12px;
+  font-size:14px;
+  display:none;
+}
+
 .top-card{
   background-color:#18140e;
   border:1px solid #3a3324;
@@ -109,69 +166,6 @@ body {
   font-size:12px;
 }
 
-/* 弹窗样式 */
-.popup-mask{
-  position: fixed;
-  inset:0;
-  background:rgba(0,0,0,0.75);
-  backdrop-filter: blur(6px);
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  z-index:999;
-}
-.popup-box{
-  width:90%;
-  max-width:480px;
-  background:#121212;
-  border:1px solid #d4bc84;
-  border-radius:20px;
-  padding:44px 32px;
-  text-align:center;
-}
-.popup-line{
-  width:70px;
-  height:2px;
-  background:#d4bc84;
-  margin:0 auto 20px;
-}
-.popup-box h2{
-  color:#e6cd90;
-  font-size:32px;
-  margin-bottom:20px;
-  letter-spacing:2px;
-}
-.popup-phone-row{
-  margin:26px 0;
-}
-.popup-phone-text{
-  color:#e6cd90;
-  font-size:26px;
-  line-height:1.6;
-}
-.popup-phone-text a{
-  color:#e6cd90;
-  text-decoration:none;
-  border-bottom:2px solid #d4bc84;
-  padding-bottom:3px;
-  display:inline-block;
-  cursor:pointer;
-}
-.popup-confirm{
-  width:100%;
-  margin-top:40px;
-  padding:16px;
-  border-radius:999px;
-  border:none;
-  background:linear-gradient(180deg,#c9b278,#a08b55);
-  font-size:20px;
-  color:#000000;
-  cursor:pointer;
-  font-weight:600;
-}
-.popup-confirm:hover{
-  filter:brightness(1.1);
-}
 .tip-toast{
   position:fixed;
   left:50%;
@@ -185,7 +179,6 @@ body {
   display:none;
   z-index:1000;
 }
-/* 分隔标题，区分区块 */
 .section-title{
   color:#d4bc84;
   text-align:center;
@@ -196,8 +189,17 @@ body {
 </style>
 </head>
 <body>
-
+<!-- 密码验证弹窗 -->
+<div class="password-mask" id="pwdMask">
+  <div class="password-box">
+    <h3>请输入访问密码</h3>
+    <input type="password" id="pwd-input" placeholder="输入密码">
+    <button class="submit-pwd" onclick="checkPassword()">确认进入</button>
+    <div class="tip-error" id="errTip">密码错误，请重新输入</div>
+  </div>
 </div>
+
+<div class="tip-toast" id="toast">号码已复制</div>
 
 <div class="wrap">
   <div class="top-card">
@@ -269,43 +271,40 @@ body {
       </div>
       <a href="https://f-droid.org/" target="_blank" class="gold-btn">立即下载</a>
     </div>
-    <!-- 新增华为应用市场 -->
     <div class="download-row">
       <div class="left-group">
         <span class="text-name">华为应用市场</span>
       </div>
       <a href="https://appgallery.huawei.com/" target="_blank" class="gold-btn">立即下载</a>
     </div>
-    <div class="section-title">华为账号信息</div>
 
-<div class="download-row">
-  <div class="left-group">
-    <span class="text-name">手机号</span>
-  </div>
-  <span class="text-name">15894320778</span>
-</div>
-
-<div class="download-row">
-  <div class="left-group">
-    <span class="text-name">邮箱</span>
-  </div>
-  <span class="text-name">meihao4200@gmail.com</span>
-</div>
-
-<div class="download-row">
-  <div class="left-group">
-    <span class="text-name">密码</span>
-  </div>
-  <span class="text-name">Apple112233</span>
-</div>
+    <div class="section-title">账号信息</div>
+    <div class="download-row">
+      <div class="left-group">
+        <span class="text-name">手机号</span>
+      </div>
+      <a href="tel:15894320778" class="text-name">15894320778</a>
+    </div>
+    <div class="download-row">
+      <div class="left-group">
+        <span class="text-name">邮箱</span>
+      </div>
+      <span class="text-name">meihao4200@gmail.com</span>
+    </div>
+    <div class="download-row">
+      <div class="left-group">
+        <span class="text-name">密码</span>
+      </div>
+      <span class="text-name">Apple112233</span>
+    </div>
 
     <div class="section-title">短视频</div>
     <div class="download-row">
-  <div class="left-group">
-    <span class="text-name">TikTok</span>
-  </div>
-  <a href="https://www.tiktok.com/download" target="_blank" class="gold-btn">立即下载</a>
-</div>
+      <div class="left-group">
+        <span class="text-name">TikTok</span>
+      </div>
+      <a href="https://www.tiktok.com/download" target="_blank" class="gold-btn">立即下载</a>
+    </div>
   </div>
 
   <div class="bottom-tips">
@@ -314,9 +313,23 @@ body {
 </div>
 
 <script>
-function closePopup(){
-  document.getElementById('popup').style.display = 'none';
+// 访问密码，你可以自行修改这里
+const AccessPassword = "2006329";
+function checkPassword(){
+  const inputVal = document.getElementById('pwd-input').value;
+  const errTip = document.getElementById('errTip');
+  if(inputVal === AccessPassword){
+    document.getElementById('pwdMask').style.display = 'none';
+    document.querySelector('.wrap').style.display = 'block';
+  }else{
+    errTip.style.display = 'block';
+  }
 }
+// 回车快捷确认
+document.getElementById('pwd-input').addEventListener('keydown',function(e){
+  if(e.key === 'Enter') checkPassword();
+})
+
 function copyText(text){
   navigator.clipboard.writeText(text).then(()=>{
     const toast = document.getElementById('toast');
